@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    {% include 'layout/navbar.html.twig' %}
+
+    <div class="container">{% block body %}{% endblock %}</div>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+#!/usr/bin/env php
+<?php
+
+require 'vendor/autoload.php';
+
+$options = getopt("h::", ["command:",]);
+
+if (isset($options["h"])) {
+    echo "This will provide some guidance about running commands." . PHP_EOL;
+}
+
+if (isset($options["command"])) {
+    $dir = "./src/Commands/";
+
+    // Get the classes in the command dir
+    $classes = [];
+    foreach (glob($dir . "*.php") as $file) {
+        $class_file = str_replace($dir, "", $file);
+        $class = substr($class_file, 0, strpos($class_file, '.'));
+        $classes[] = $class;
+    }
+
+    // Run the command if it is found:
+    if (in_array($options["command"], $classes, true)) {
+        $class_pos = array_search($options["command"], $classes);
+        $full_class = "Commands\\" . $classes[$class_pos];
+        $command = new $full_class;
+        $command->run();
+    } else {
+        echo "Command NOT found. Possible commands are:" . PHP_EOL;
+        foreach ($classes as $class_name) {
+            $full_class = "Commands\\" . $class_name;
+            $class = new $full_class;
+            echo '- ' . $class_name . ' : ' . $class->getDescription() . PHP_EOL;
+        }
+    }
+}
+
+if (!isset($options["command"])) {
+    echo "Use --command. Ex: --command CommandName" . PHP_EOL;
+}
+
+exit();
