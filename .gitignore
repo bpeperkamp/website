@@ -1,2 +1,6 @@
 /vendor/
+# the aim is not to use any node_modules
+/node_modules/
 /logs/*.log
+/database/*
+/storage/*
