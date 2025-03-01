@@ -1,20 +1,16 @@
 <?php
 
 use Controllers\HomeController;
-use Controllers\TestController;
-
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
+use Controllers\ArticleController;
+use Controllers\SearchController;
 
 require realpath(__DIR__ . '/../vendor/autoload.php');
 
-$config['displayErrorDetails'] = true;
-$config['addContentLengthHeader'] = false;
-
 $container = new \Slim\Container();
+
 $container['view'] = function ($container) {
     $view = new \Slim\Views\Twig('../resources/views', [
-        //'cache' => 'path/to/cache'
+        //'cache' => '../storage/cache'
         'cache' => false
     ]);
 
@@ -33,9 +29,16 @@ $container['notFoundHandler'] = function ($container) {
     };
 };
 
-$app = new \Slim\App($container, ["settings" => $config]);
+$app = new \Slim\App($container, [
+    "settings" => [
+        'displayErrorDetails' => true,
+        'addContentLengthHeader' => false
+    ]
+]);
 
-$app->get('/', HomeController::class . ':index');
-$app->get('/test', TestController::class . ':index');
+$app->get('/', HomeController::class . ':index')->setName('home');
+$app->get('/articles', ArticleController::class . ':index')->setName('articles');
+$app->get('/article/{slug}', ArticleController::class . ':show')->setName('article');
+$app->post('/search', SearchController::class . ':search')->setName('search');
 
 $app->run();

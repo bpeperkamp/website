@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Classes\Database;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -17,10 +18,13 @@ class HomeController
 
     public function index(Request $request, Response $response)
     {
+        $database = new Database();
+
         return $this->container
             ->get('view')
             ->render($response, "home/index.html.twig", [
-                'message' => 'Hello im a message from the home controller!'
+                'message' => 'Hello im a message from the home controller!',
+                'articles' => $database->get_articles()
             ]);
     }
 }

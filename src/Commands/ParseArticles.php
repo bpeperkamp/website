@@ -4,6 +4,7 @@ namespace Commands;
 
 use Interfaces\CommandInterface;
 use Classes\Database;
+use Parsedown;
 
 class ParseArticles implements CommandInterface 
 {
@@ -21,6 +22,13 @@ class ParseArticles implements CommandInterface
         $articles = json_decode($file);
 
         $database = new Database();
+
+        $parsedown = new Parsedown();
+
+        foreach ($articles as $article) {
+            $content = $parsedown->parse($article->content);
+            $article->content = $content;
+        }
 
         foreach ($articles as $article) {
             $database->store_article($article);

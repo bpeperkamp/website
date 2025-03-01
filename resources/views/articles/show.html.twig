@@ -1,0 +1,8 @@
+{% extends "layout/layout.html.twig" %}
+
+{% block body %}
+<h1>{{ article.title }}</h1>
+<div class="article-content markdown-body text-secondary">
+    {{ article.content|raw }}
+</div>
+{% endblock %}

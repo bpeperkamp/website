@@ -4,6 +4,7 @@ namespace Classes;
 
 use stdClass;
 use SQLite3;
+use Classes\Logger;
 
 class Database
 {
@@ -37,7 +38,8 @@ class Database
         $db = new SQLite3(realpath("./database") . "/database.db", SQLITE3_OPEN_READWRITE);
 
         $statement = $db->prepare('INSERT INTO "categories" ("title", "slug")
-            VALUES (:title, :slug) ON CONFLICT(title) DO UPDATE SET title=:title');
+            VALUES (:title, :slug) 
+            ON CONFLICT(title) DO UPDATE SET title=:title');
 
         $statement->bindValue(':title', $category->title);
         $statement->bindValue(':slug', $category->slug);
@@ -55,5 +57,35 @@ class Database
         }
 
         return $db->lastInsertRowID();
+    }
+
+    public function get_articles(): array
+    {
+        $db = new SQLite3(realpath("../database") . "/database.db", SQLITE3_OPEN_READONLY);
+        
+        $statement = $db->prepare('SELECT * FROM articles');
+
+        $result = $statement->execute();
+
+        $rows = [];
+
+        while($res = $result->fetchArray(SQLITE3_ASSOC)) {
+            $rows[] = $res;
+        }
+
+        return $rows;
+    }
+
+    public function get_article_by_slug(string $slug): array
+    {
+        $db = new SQLite3(realpath("../database") . "/database.db", SQLITE3_OPEN_READONLY);
+        
+        $statement = $db->prepare('SELECT * FROM "articles" WHERE "slug" = :slug LIMIT 1');
+        $statement->bindValue(':slug', $slug);
+        $result = $statement->execute();
+        
+        $result = $result->fetchArray(SQLITE3_ASSOC);
+
+        return $result;
     }
 }

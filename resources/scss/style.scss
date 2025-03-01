@@ -1,43 +1,34 @@
 @import "bootstrap/scss/bootstrap";
 @import "bootstrap/scss/variables";
 
-:root {
-	--headings-font-family: 'trashhand';
-    --bs-body-font-family: var(--bs-font-sans-serif);
+.card {
+    p {
+        font-size: small;
+    }
+
+    p:last-of-type {
+        margin-bottom: 0;
+    }
 }
 
-html.show-grid body {
-    background-image: linear-gradient(to bottom, #0ff 0, transparent 1px);
-    background-repeat: repeat-y;
-    background-size: 100% 1rem;
+.article-content {
+    margin-bottom: 5rem;
+    img {
+        border-radius: 5px;
+    }
 }
 
-h1, h2, h3, h4, h5, h6 {
-    --baselines: 3;
-    --beneath: 1;
-    --baseline-shift: calc(calc(calc(var(--baselines) * 1rem) - 1cap) / 2);
-    --baseline-push: calc(calc(var(--beneath) * 1rem) - var(--baseline-shift));
-    font-weight: 700;
-    line-height: calc(var(--baselines) * 1rem);
-    margin: 0;
-    padding: 0;
-    font-feature-settings: 'kern', 'lnum', 'liga';
-    padding-top: var(--baseline-shift);
-    margin-bottom: var(--baseline-push);
+.article-summary {
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    .body {
+        padding: 1rem;
+    }
+    .markdown-body {
+        margin-bottom: 1rem;
+    }
 }
 
-p {
-    --baselines: 2;
-    --beneath: 1;
-    --baseline-shift: calc(calc(calc(var(--baselines) * 1rem) - 1cap) / 2);
-    --baseline-push: calc(calc(var(--beneath) * 1rem) - var(--baseline-shift));
-
-    font-family: var(--body-fonts);
-    font-size: 1.2rem;
-    line-height: calc(var(--baselines) * 1rem);
-    margin: 0;
-    padding: 0; 
-    font-feature-settings: 'kern', 'onum', 'liga';
-    padding-top: var(--baseline-shift);
-    margin-bottom: var(--baseline-push);
-}
+@import "markdown";

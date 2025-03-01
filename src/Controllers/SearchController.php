@@ -2,11 +2,12 @@
 
 namespace Controllers;
 
+use Classes\Database;
 use Psr\Container\ContainerInterface;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class TestController
+class SearchController
 {
     protected $container;
 
@@ -15,10 +16,8 @@ class TestController
         $this->container = $container;
     }
 
-    public function index(Request $request, Response $response)
+    public function search(Request $request, Response $response)
     {
-        return $this->container
-            ->get('view')
-            ->render($response, "home/test.html.twig");
+        var_dump("testes");
     }
 }
