@@ -1,7 +1,10 @@
 <?php
 
+use Twig\TwigFunction;
+
 use Controllers\HomeController;
 use Controllers\ArticleController;
+use Controllers\CategoryController;
 use Controllers\SearchController;
 
 require realpath(__DIR__ . '/../vendor/autoload.php');
@@ -29,6 +32,13 @@ $container['notFoundHandler'] = function ($container) {
     };
 };
 
+$function = new TwigFunction('which_route', function () use ($container) {
+    $url = $container->get('request')->getUri();
+    return strtok($url->getPath(), '/');
+});
+
+$container->get('view')->getEnvironment()->addFunction($function);
+
 $app = new \Slim\App($container, [
     "settings" => [
         'displayErrorDetails' => true,
@@ -39,6 +49,8 @@ $app = new \Slim\App($container, [
 $app->get('/', HomeController::class . ':index')->setName('home');
 $app->get('/articles', ArticleController::class . ':index')->setName('articles');
 $app->get('/article/{slug}', ArticleController::class . ':show')->setName('article');
+$app->get('/categories', CategoryController::class . ':index')->setName('categories');
+$app->get('/category/{slug}', CategoryController::class . ':show')->setName('category');
 $app->post('/search', SearchController::class . ':search')->setName('search');
 
 $app->run();
