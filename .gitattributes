@@ -1,2 +1,4 @@
 * linguist-vendored
 *.php linguist-vendored=false
+*.twig linguist-vendored=false
+*.js linguist-vendored=false
