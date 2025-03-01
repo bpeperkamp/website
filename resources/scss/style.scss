@@ -5,7 +5,9 @@ $font-family-sans-serif: "Poppins-Regular", "Helvetica Neue", Arial !default;
 @import "fonts";
 @import "markdown";
 
-// $font-family-sans-serif: "Poppins-Regular", "Helvetica Neue", Arial;
+:root {
+    --bs-body-font-family: "Roboto-Slab", "Helvetica Neue", Arial;
+}
 
 h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
     font-family: "Poppins-Medium", "Helvetica Neue", Arial;
@@ -15,6 +17,10 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
     h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
         color: #FFF;
     }
+}
+
+.btn {
+    font-family: "Poppins-Medium", "Helvetica Neue", Arial;
 }
 
 .card {

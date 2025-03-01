@@ -23,7 +23,6 @@ class HomeController
         return $this->container
             ->get('view')
             ->render($response, "home/index.html.twig", [
-                'message' => 'Hello im a message from the home controller!',
                 'articles' => $database->get_articles()
             ]);
     }

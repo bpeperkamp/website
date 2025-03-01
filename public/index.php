@@ -26,7 +26,7 @@ $container['view'] = function ($container) {
 
 $container['notFoundHandler'] = function ($container) {
     return function ($request, $response) use ($container) {
-        return $container['view']->render($response->withStatus(404), 'generic/404.php', [
+        return $container['view']->render($response->withStatus(404), 'generic/404.html.twig', [
             "message" => "Could not find the requested page."
         ]);
     };

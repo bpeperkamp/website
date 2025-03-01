@@ -1,11 +1,13 @@
-<form class="d-flex" role="search" action="{{ path_for('search') }}" method="POST">
+<form class="d-flex" role="search" action="{{ path_for('search') }}" method="POST" autocomplete="off">
     <input
+        id="search"
         class="form-control me-2"
         type="search"
         placeholder="Search"
         aria-label="Search"
+        pattern="[a-zA-Z0-9]{3,30}"
     />
-    <button class="btn btn-outline-success" type="submit">
+    <button class="btn btn-outline-success" type="submit" id="search_button" disabled>
         Search
     </button>
 </form>
