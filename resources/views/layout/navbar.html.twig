@@ -1,5 +1,5 @@
-{% set articles_route = which_route() == "articles" or which_route() == "article" %}
-{% set categories_route = which_route() == "categories" or which_route() == "category" %}
+{% set articles_route = active_route() == "articles" or active_route() == "article" %}
+{% set categories_route = active_route() == "categories" or active_route() == "category" %}
 
 <nav class="navbar navbar-expand-lg bg-dark mb-4" data-bs-theme="dark">
     <div class="container">

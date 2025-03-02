@@ -1,37 +1,45 @@
 {% extends "layout/layout.html.twig" %}
 
-{% block body %}
-<h1>Hello and welcome!</h1>
-<p>My name is Bart Peperkamp and i'm interested in software development, Linux and electronics (and a lot more). I've built this site in my own little framework and is meant as a place to occasionally post some articles and possible solutions.<br /><br />My work and profile can be found here:</p>
-<ul class="mb-5">
-    <li><a href="https://github.com/bpeperkamp" title="Github" target="_blank" class="text-decoration-none">Github</a></li>
-    <li><a href="https://www.linkedin.com/in/bart-peperkamp" title="LinkedIn" target="_blank" class="text-decoration-none">LinkedIn</a></li>
-</ul>
-<h2 class="h3 mb-3">Latest articles</h2>
-{% for article in articles %}
-    {% if loop.first %}
-        <div class="row">
-    {% endif %}
-        <div class="col-md-3 col-sm-6 mb-4">
-            <div class="card h-100">
-                <a href="{{ path_for('article', { 'slug': article.slug }) }}" title="Read: {{ article.title }}" class="text-decoration-none">
-                    <div class="card-body">
-                        <h2 class="h5 pt-0 mt-0">
-                            {{ article.title }}
-                        </h2>
-                        <div class="card-text">
-                            {{ article.content|striptags|slice(0, 150)|raw }} ...
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-    {% if loop.index % 4 == 0 %}
-        </div><div class="row">
-    {% endif %}
-    {% if loop.last %}
-        </div>
-    {% endif %}
-{% endfor %}
+{% block title %}Welcome to my blog!{% endblock %}
 
+{% block body %}
+    <h1>Hello and welcome!</h1>
+    <p>My name is Bart Peperkamp and i'm interested in software development, Linux and electronics (and a lot more). I've built this site in my own little framework and is meant as a place to occasionally post some articles and possible solutions.<br /><br />My work and profile can be found here:</p>
+    <ul class="mb-5">
+        <li>
+            <a href="https://github.com/bpeperkamp" title="Github" target="_blank" class="text-decoration-none">Github</a>
+        </li>
+        <li>
+            <a href="https://www.linkedin.com/in/bart-peperkamp" title="LinkedIn" target="_blank" class="text-decoration-none">LinkedIn</a>
+        </li>
+    </ul>
+    <h2 class="h3 mb-3">
+        Latest articles
+    </h2>
+    {% for article in articles %}
+        {% if loop.first %}
+            <div class="row">
+        {% endif %}
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card h-100">
+                    <a href="{{ path_for('article', { 'slug': article.slug }) }}" title="Read: {{ article.title }}" class="text-decoration-none">
+                        <div class="card-body">
+                            <h2 class="h5 pt-0 mt-0">
+                                {{ article.title }}
+                            </h2>
+                            <div class="card-text">
+                                {{ article.content|striptags|slice(0, 150)|raw }} ...
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        {% if loop.index % 4 == 0 %}
+            </div><div class="row">
+        {% endif %}
+        {% if loop.last %}
+            </div>
+        {% endif %}
+    {% endfor %}
+    <a href="{{ path_for('articles') }}" class="text-decoration-none fs-6">Go to all articles</a>
 {% endblock %}

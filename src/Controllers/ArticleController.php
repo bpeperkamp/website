@@ -20,10 +20,16 @@ class ArticleController
     {
         $database = new Database();
 
+        $categories = $database->get_categories();
+
+        $articles = empty($request->getQueryParam("category")) ? $database->get_articles() : $database->get_articles_by_category($request->getQueryParam("category"));
+
         return $this->container
             ->get('view')
             ->render($response, "articles/index.html.twig", [
-                'articles' => $database->get_articles()
+                'articles' => $articles,
+                'categories' => $categories,
+                'selected_category' => $request->getQueryParam("category")
             ]);
     }
 

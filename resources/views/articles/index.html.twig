@@ -1,7 +1,47 @@
 {% extends "layout/layout.html.twig" %}
 
+{% block title %}Articles{% endblock %}
+
 {% block body %}
-    <h1>Articles:</h1>
+    <div class="row mb-3">
+        <div class="col">
+            <h1>Articles:</h1>
+        </div>
+        <div class="col">
+            {% if categories|length > 0 %}
+                <form class="mt-md-2 mt-sm-0" action="{{ path_for('articles') }}" id="category_select_form">
+                    <div class="d-flex flex-row justify-content-end">
+                        <div>
+                            <label for="category" class="col-sm-4 col-form-label visually-hidden">Select category</label>
+                            <select class="form-select" name="category" id="category_select" aria-label="Select category" autocomplete="off">
+                                {% if selected_category|length > 0 %}
+                                    <option value="0">Select category</option>
+                                {% else %}
+                                    <option value="0" selected>Select category</option>
+                                {% endif %}
+                                {% for category in categories %}
+                                    {% if selected_category == category.slug %}
+                                        <option value="{{ category.slug }}" selected>{{ category.title }}</a>
+                                    {% else %}
+                                        <option value="{{ category.slug }}">{{ category.title }}</a>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary visually-hidden">filter</button>
+                        </div>
+                    </div>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if articles|length == 0 %}
+        <div class="alert alert-warning" role="alert">
+            Sorry, no articles where found
+        </div>
+    {% endif %}
     
     {% for article in articles %}
         <div class="article-summary">

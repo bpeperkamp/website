@@ -32,7 +32,7 @@ $container['notFoundHandler'] = function ($container) {
     };
 };
 
-$function = new TwigFunction('which_route', function () use ($container) {
+$function = new TwigFunction('active_route', function () use ($container) {
     $url = $container->get('request')->getUri();
     return strtok($url->getPath(), '/');
 });

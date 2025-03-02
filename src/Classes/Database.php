@@ -20,7 +20,7 @@ class Database
         $statement = $db->prepare('INSERT INTO "articles" ("title", "slug", "content", "created_at", "updated_at", "category_id")
             VALUES (:title, :slug, :content, :created_at, :updated_at, :category_id) 
             ON CONFLICT(title) DO UPDATE SET title=:title, slug=:slug, content=:content');
-        
+
         $statement->bindValue(':title', $article->title);
         $statement->bindValue(':slug', $article->slug);
         $statement->bindValue(':content', $article->content);
@@ -62,14 +62,14 @@ class Database
     public function get_articles($limit = 8): array
     {
         $db = new SQLite3(realpath("../database") . "/database.db", SQLITE3_OPEN_READONLY);
-        
+
         $statement = $db->prepare('SELECT * FROM articles LIMIT :limit');
         $statement->bindValue(':limit', $limit);
         $result = $statement->execute();
 
         $rows = [];
 
-        while($res = $result->fetchArray(SQLITE3_ASSOC)) {
+        while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
             $rows[] = $res;
         }
 
@@ -79,11 +79,11 @@ class Database
     public function get_article_by_slug(string $slug): array
     {
         $db = new SQLite3(realpath("../database") . "/database.db", SQLITE3_OPEN_READONLY);
-        
+
         $statement = $db->prepare('SELECT * FROM "articles" WHERE "slug" = :slug LIMIT 1');
         $statement->bindValue(':slug', $slug);
         $result = $statement->execute();
-        
+
         $result = $result->fetchArray(SQLITE3_ASSOC);
 
         return $result;
@@ -92,13 +92,13 @@ class Database
     public function get_categories(): array
     {
         $db = new SQLite3(realpath("../database") . "/database.db", SQLITE3_OPEN_READONLY);
-        
+
         $statement = $db->prepare('SELECT * FROM categories');
 
         $result = $statement->execute();
 
         $rows = [];
-        while($res = $result->fetchArray(SQLITE3_ASSOC)) {
+        while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
             $rows[] = $res;
         }
 
@@ -108,14 +108,30 @@ class Database
     public function get_articles_by_category(string $slug)
     {
         $db = new SQLite3(realpath("../database") . "/database.db", SQLITE3_OPEN_READONLY);
-        
+
         // Get the articles from the category
         $statement = $db->prepare('SELECT * FROM "articles" WHERE "category_id" = (SELECT id FROM "categories" WHERE "slug" = :slug LIMIT 1)');
         $statement->bindValue(':slug', $slug);
         $result = $statement->execute();
 
         $rows = [];
-        while($res = $result->fetchArray(SQLITE3_ASSOC)) {
+        while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
+            $rows[] = $res;
+        }
+
+        return $rows;
+    }
+
+    public function search_articles(string $query): array
+    {
+        $db = new SQLite3(realpath("../database") . "/database.db", SQLITE3_OPEN_READONLY);
+
+        $statement = $db->prepare('SELECT title, slug FROM "articles" WHERE "title" LIKE :query OR "content" LIKE :query');
+        $statement->bindValue(':query', "%" . $query . "%");
+        $result = $statement->execute();
+
+        $rows = [];
+        while ($res = $result->fetchArray(SQLITE3_ASSOC)) {
             $rows[] = $res;
         }
 
