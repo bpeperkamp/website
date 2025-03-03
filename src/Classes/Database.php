@@ -126,7 +126,7 @@ class Database
     {
         $db = new SQLite3(realpath("../database") . "/database.db", SQLITE3_OPEN_READONLY);
 
-        $statement = $db->prepare('SELECT title, slug FROM "articles" WHERE "title" LIKE :query OR "content" LIKE :query');
+        $statement = $db->prepare('SELECT title, slug, content FROM "articles" WHERE "title" LIKE :query OR "content" LIKE :query');
         $statement->bindValue(':query', "%" . $query . "%");
         $result = $statement->execute();
 
