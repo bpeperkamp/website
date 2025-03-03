@@ -39,11 +39,18 @@ class ArticleController
         $slug = $route->getArgument('slug');
 
         $database = new Database();
+        $articles = $database->get_article_by_slug($slug);
+
+        if (empty($articles)) {
+            return $this->container
+                ->get('view')
+                ->render($response->withStatus(404), "generic/404.html.twig");
+        }
 
         return $this->container
             ->get('view')
             ->render($response, "articles/show.html.twig", [
-                'article' => $database->get_article_by_slug($slug)
+                'article' => $articles
             ]);
     }
 }

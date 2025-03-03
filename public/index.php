@@ -52,5 +52,6 @@ $app->get('/article/{slug}', ArticleController::class . ':show')->setName('artic
 $app->get('/categories', CategoryController::class . ':index')->setName('categories');
 $app->get('/category/{slug}', CategoryController::class . ':show')->setName('category');
 $app->post('/search', SearchController::class . ':search')->setName('search');
+$app->get('/search', SearchController::class . ':search_submit')->setName('search_submit');
 
 $app->run();

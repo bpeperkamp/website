@@ -4,4 +4,25 @@
 
 {% block body %}
     <h1>Search Result:</h1>
+    {% if articles|length == 0 %}
+        <div class="alert alert-warning" role="alert">
+            Sorry, no articles where found
+        </div>
+    {% endif %}
+    
+    {% for article in articles %}
+        <div class="article-summary">
+            <div class="body">
+                <a href="{{ path_for('article', { 'slug': article.slug }) }}" title="Read: {{ article.title }}" class="text-decoration-none">
+                    <h2 class="h4">
+                        {{ article.title }}
+                    </h2>
+                </a>
+                <div class="markdown-body">
+                    {{ article.content|striptags|slice(0, 400)|raw }} ...
+                </div>
+                <a href="{{ path_for('article', { 'slug': article.slug }) }}" title="Read: {{ article.title }}" class="btn btn-sm btn-secondary">Read article</a>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}

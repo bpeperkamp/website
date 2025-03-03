@@ -76,7 +76,7 @@ class Database
         return $rows;
     }
 
-    public function get_article_by_slug(string $slug): array
+    public function get_article_by_slug(string $slug): array|bool
     {
         $db = new SQLite3(realpath("../database") . "/database.db", SQLITE3_OPEN_READONLY);
 
