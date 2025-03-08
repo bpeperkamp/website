@@ -22,7 +22,7 @@ class ArticleController
 
         $categories = $database->get_categories();
 
-        $articles = empty($request->getQueryParam("category")) ? $database->get_articles() : $database->get_articles_by_category($request->getQueryParam("category"));
+        $articles = empty($request->getQueryParam("category")) ? $database->get_articles(200) : $database->get_articles_by_category($request->getQueryParam("category"));
 
         return $this->container
             ->get('view')

@@ -63,7 +63,7 @@ class Database
     {
         $db = new SQLite3(realpath("../database") . "/database.db", SQLITE3_OPEN_READONLY);
 
-        $statement = $db->prepare('SELECT * FROM articles LIMIT :limit');
+        $statement = $db->prepare('SELECT * FROM articles ORDER BY created_at DESC LIMIT :limit');
         $statement->bindValue(':limit', $limit);
         $result = $statement->execute();
 
