@@ -15,6 +15,9 @@
     </ul>
     <h2 class="h3 mb-3">
         Latest articles
+        <small>
+            <a href="{{ path_for('articles') }}" class="text-decoration-none fs-6">Go to all articles</a>
+        </small>
     </h2>
     {% for article in articles %}
         {% if loop.first %}
@@ -41,5 +44,4 @@
             </div>
         {% endif %}
     {% endfor %}
-    <a href="{{ path_for('articles') }}" class="text-decoration-none fs-6">Go to all articles</a>
 {% endblock %}
