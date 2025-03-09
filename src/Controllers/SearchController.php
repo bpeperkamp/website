@@ -54,6 +54,12 @@ class SearchController
             return $response->withJson($response_data, 200);
         }
 
+        $csrf_form_token = htmlspecialchars($query["csrf_token"], ENT_QUOTES, 'UTF-8');
+
+        if (!hash_equals($_SESSION["csrf_token"], $csrf_form_token)) {
+            return $response->withRedirect($this->container->get("router")->pathFor("home"));
+        }
+
         return $response->withRedirect($this->container->get("router")->pathFor("search_submit", [], ["query" => $query["search"]]), 301);
     }
 

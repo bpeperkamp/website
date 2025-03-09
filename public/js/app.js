@@ -26,7 +26,6 @@ const inputHandler = function (e) {
       if (xhttp.readyState == 4) {
         if (xhttp.status == 200) {
           var data = JSON.parse(xhttp.response);
-          console.log(data);
           search_result_list.innerHTML = "";
           search_result.classList.remove("invisible");
           search_result.classList.add("visible");
