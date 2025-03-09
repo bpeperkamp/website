@@ -9,14 +9,14 @@ use Slim\Http\Response;
 
 class HomeController
 {
-    protected $container;
+    private $container;
 
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
     }
 
-    public function index(Request $request, Response $response)
+    public function index(Request $request, Response $response): Response
     {
         $database = new Database();
 
