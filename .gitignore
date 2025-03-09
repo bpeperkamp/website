@@ -8,3 +8,4 @@ public/js/*.min.js
 public/js/*.min.js.map
 public/css/*.min.css
 public/css/*.min.css.map
+.phpunit.cache/

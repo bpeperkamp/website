@@ -21,10 +21,15 @@ class CompileFrontend implements CommandInterface
 
         $result = $compiler->compileFile($file_location);
 
-        file_put_contents("./public/css/bootstrap.min.css", $result->getCss());
+        // Create the directory if it does not exist
+        if (!file_exists(realpath("public/css"))) {
+            mkdir(realpath("public") . '/css', 0755);
+        }
+
+        file_put_contents(realpath("public/css") . "/app.min.css", $result->getCss());
 
         $logger = new Logger();
-        $logger->log(date("Y-m-d H:i:s") . ': success - SCSS compiled and placed in /public/css/bootstrap.min.css');
+        $logger->log(date("Y-m-d H:i:s") . ': success - SCSS compiled and placed in /public/css/app.min.css');
 
         echo 'Done!' . PHP_EOL;
     }
