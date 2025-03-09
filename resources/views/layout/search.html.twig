@@ -1,19 +1,11 @@
 <div class="position-relative">
-    <form class="d-flex" role="search" action="{{ path_for('search') }}" method="POST" autocomplete="off">
-        <input
-            id="search"
-            class="form-control me-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            pattern="[a-zA-Z0-9]{3,30}",
-            name="search"
-        />
-        <button class="btn btn-outline-success" type="submit" id="search_button" disabled>
-            Search
-        </button>
-    </form>
-    <div class="position-absolute end-0 shadow-sm rounded bg-success w-100 p-3 mt-3 z-3 invisible" id="search_result">
-        <ul class="mb-0 ms-0 ps-3" id="search_result_list"></ul>
-    </div>
+	<form class="d-flex" role="search" action="{{ path_for('search') }}" method="POST" autocomplete="off">
+		<input id="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" pattern="[a-zA-Z0-9]{3,30}" , name="search"/>
+		<button class="btn btn-outline-success" type="submit" id="search_button" disabled>
+			Search
+		</button>
+	</form>
+	<div class="position-absolute end-0 shadow-sm rounded bg-success w-100 p-3 mt-3 z-3 invisible" id="search_result">
+		<ul class="mb-0 ms-0 ps-3" id="search_result_list"></ul>
+	</div>
 </div>

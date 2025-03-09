@@ -2,58 +2,50 @@
 {% set categories_route = active_route() == "categories" or active_route() == "category" %}
 
 <nav class="navbar navbar-expand-lg bg-dark mb-4" data-bs-theme="dark">
-    <div class="container">
-    <a class="navbar-brand" href="{{ path_for('home') }}">
-        {% include 'layout/logo.html.twig' %}
-    </a>
-    <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-    >
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-            {% if articles_route %}
-                <a class="nav-link active" aria-current="page" href="{{ path_for('articles') }}">Articles</a>
-            {% else %}
-                <a class="nav-link" aria-current="page" href="{{ path_for('articles') }}">Articles</a>
-            {% endif %}
-        </li>
-        <li class="nav-item">
-            {% if categories_route %}
-                <a class="nav-link active" href="{{ path_for('categories') }}">Categories</a>
-            {% else %}
-                <a class="nav-link" aria-current="page" href="{{ path_for('categories') }}">Categories</a>
-            {% endif %}
-        </li>
-        {# <li class="nav-item dropdown">
-            <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            >
-            Dropdown
-            </a>
-            <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider" /></li>
-            <li>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </li>
-            </ul>
-        </li> #}
-        </ul>
-        {% include 'layout/search.html.twig' %}
-    </div>
-    </div>
+	<div class="container">
+		<a class="navbar-brand" href="{{ path_for('home') }}">
+			{% include 'layout/logo.html.twig' %}
+		</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					{% if articles_route %}
+						<a class="nav-link active" aria-current="page" href="{{ path_for('articles') }}">Articles</a>
+					{% else %}
+						<a class="nav-link" aria-current="page" href="{{ path_for('articles') }}">Articles</a>
+					{% endif %}
+				</li>
+				<li class="nav-item">
+					{% if categories_route %}
+						<a class="nav-link active" href="{{ path_for('categories') }}">Categories</a>
+					{% else %}
+						<a class="nav-link" aria-current="page" href="{{ path_for('categories') }}">Categories</a>
+					{% endif %}
+				</li>
+				{# <li class="nav-item dropdown">
+				            <a
+				            class="nav-link dropdown-toggle"
+				            href="#"
+				            role="button"
+				            data-bs-toggle="dropdown"
+				            aria-expanded="false"
+				            >
+				            Dropdown
+				            </a>
+				            <ul class="dropdown-menu">
+				            <li><a class="dropdown-item" href="#">Action</a></li>
+				            <li><a class="dropdown-item" href="#">Another action</a></li>
+				            <li><hr class="dropdown-divider" /></li>
+				            <li>
+				                <a class="dropdown-item" href="#">Something else here</a>
+				            </li>
+				            </ul>
+				        </li> #}
+			</ul>
+			{% include 'layout/search.html.twig' %}
+		</div>
+	</div>
 </nav>

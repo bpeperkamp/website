@@ -1,15 +1,18 @@
 {% extends "layout/layout.html.twig" %}
 
-{% block title %}{{ article.title }}{% endblock %}
+{% block title %}
+	{{ article.title }}
+{% endblock %}
 
 {% block body %}
-    <div class="article-full">
-        <h1>{{ article.title }}</h1>
-        <p class="text-secondary">
-            <small>written at: {{ article.created_at|date("d/m/Y") }}</small>
-        </p>
-        <div class="article-content markdown-body">
-            {{ article.content|raw }}
-        </div>
-    </div>
+	<div class="article-full">
+		<h1>{{ article.title }}</h1>
+		<p class="text-secondary">
+			<small>written at:
+				{{ article.created_at|date("d/m/Y") }}</small>
+		</p>
+		<div class="article-content markdown-body">
+			{{ article.content|raw }}
+		</div>
+	</div>
 {% endblock %}

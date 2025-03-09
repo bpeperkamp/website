@@ -1,21 +1,22 @@
 {% extends "layout/layout.html.twig" %}
 
-{% block title %}Categories{% endblock %}
+{% block title %}Categories
+{% endblock %}
 
 {% block body %}
-    <h1>Categories:</h1>
+	<h1>Categories:</h1>
 
-    {% for category in categories %}
-        <div class="article-summary">
-            <div class="body">
-                <a href="{{ path_for('category', { 'slug': category.slug }) }}" title="{{ category.title }}" class="text-decoration-none">
-                    <h2 class="h4">
-                        {{ category.title }}
-                    </h2>
-                </a>
-                <a href="{{ path_for('category', { 'slug': category.slug }) }}" title="{{ category.title }}" class="btn btn-sm btn-secondary">Show articles</a>
-            </div>
-        </div>
-    {% endfor %}
+	{% for category in categories %}
+		<div class="article-summary">
+			<div class="body">
+				<a href="{{ path_for('category', { 'slug': category.slug }) }}" title="{{ category.title }}" class="text-decoration-none">
+					<h2 class="h4">
+						{{ category.title }}
+					</h2>
+				</a>
+				<a href="{{ path_for('category', { 'slug': category.slug }) }}" title="{{ category.title }}" class="btn btn-sm btn-secondary">Show articles</a>
+			</div>
+		</div>
+	{% endfor %}
 
 {% endblock %}

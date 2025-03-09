@@ -1,0 +1,4 @@
+Contact: mailto:postmaster@peperkamp.dev
+Expires: 2026-02-28T23:00:00.000Z
+Preferred-Languages: en,nl
+Canonical: https://peperkamp.dev/.well-known/security.txt

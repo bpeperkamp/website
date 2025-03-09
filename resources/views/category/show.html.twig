@@ -1,23 +1,25 @@
 {% extends "layout/layout.html.twig" %}
 
-{% block title %}Category{% endblock %}
+{% block title %}Category
+{% endblock %}
 
 {% block body %}
-    <h1>Category:</h1>
+	<h1>Category:</h1>
 
-    {% for article in articles %}
-        <div class="article-summary">
-            <div class="body">
-                <a href="{{ path_for('article', { 'slug': article.slug }) }}" title="{{ article.title }}" class="text-decoration-none">
-                    <h2 class="h4">
-                        {{ article.title }}
-                    </h2>
-                </a>
-                <div class="markdown-body">
-                    {{ article.content|striptags|slice(0, 200)|raw }} ...
-                </div>
-                <a href="{{ path_for('article', { 'slug': article.slug }) }}" title="{{ article.title }}" class="btn btn-sm btn-secondary">Read article</a>
-            </div>
-        </div>
-    {% endfor %}
+	{% for article in articles %}
+		<div class="article-summary">
+			<div class="body">
+				<a href="{{ path_for('article', { 'slug': article.slug }) }}" title="{{ article.title }}" class="text-decoration-none">
+					<h2 class="h4">
+						{{ article.title }}
+					</h2>
+				</a>
+				<div class="markdown-body">
+					{{ article.content|striptags|slice(0, 200)|raw }}
+					...
+				</div>
+				<a href="{{ path_for('article', { 'slug': article.slug }) }}" title="{{ article.title }}" class="btn btn-sm btn-secondary">Read article</a>
+			</div>
+		</div>
+	{% endfor %}
 {% endblock %}
