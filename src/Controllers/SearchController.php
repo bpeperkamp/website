@@ -25,14 +25,23 @@ class SearchController
         $query = $request->getParsedBody();
 
         if ($request->isXhr()) {
-            $sanitized_input = htmlspecialchars($query["data"], ENT_QUOTES, 'UTF-8');
-            $articles = $database->search_articles($sanitized_input);
+
+            $csrf_token = $request->getHeader("X-CSRF-TOKEN");
+
+            if (!hash_equals($_SESSION["csrf_token"], $csrf_token[0])) {
+                return $response->withStatus(403);
+            }
+
+            $sanitized_query = htmlspecialchars($query["data"], ENT_QUOTES, 'UTF-8');
+
+            $articles = $database->search_articles($sanitized_query);
 
             $response_data = [
                 "success" => false,
                 "xhr" => null,
                 "query" => null,
-                "result" => null
+                "result" => null,
+                "csrf" => $csrf_token[0]
             ];
 
             if (isset($query["data"])) {
@@ -51,6 +60,7 @@ class SearchController
     public function search_submit(Request $request, Response $response)
     {
         $query = $request->getQueryParams();
+
         $sanitized_input = htmlspecialchars($query["query"], ENT_QUOTES, 'UTF-8');
 
         $database = new Database();

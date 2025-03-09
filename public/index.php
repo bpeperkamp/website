@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 use Twig\TwigFunction;
 
 use Controllers\HomeController;
@@ -37,7 +43,9 @@ $function = new TwigFunction('active_route', function () use ($container) {
     return strtok($url->getPath(), '/');
 });
 
-$container->get('view')->getEnvironment()->addFunction($function);
+$environment = $container->get('view')->getEnvironment();
+$environment->addFunction($function);
+$environment->addGlobal('session', $_SESSION);
 
 $app = new \Slim\App($container, [
     "settings" => [

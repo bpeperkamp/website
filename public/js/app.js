@@ -4,6 +4,7 @@ const category_select = document.getElementById("category_select");
 const category_select_form = document.getElementById("category_select_form");
 const search_result = document.getElementById("search_result");
 const search_result_list = document.getElementById("search_result_list");
+const csrf_token = document.querySelector('meta[name="csrf_token"]');
 
 var xhttp = new XMLHttpRequest();
 
@@ -11,15 +12,21 @@ const inputHandler = function (e) {
   if (e.target.value.length >= 3) {
     var value = { data: e.target.value };
     button.disabled = false;
+
     // Request the data from the search route
     xhttp.open("POST", "/search", true);
-    xhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
     xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+    xhttp.setRequestHeader(
+      "X-CSRF-TOKEN",
+      csrf_token ? csrf_token.content : null
+    );
     xhttp.send(JSON.stringify(value));
     xhttp.onreadystatechange = function () {
       if (xhttp.readyState == 4) {
         if (xhttp.status == 200) {
           var data = JSON.parse(xhttp.response);
+          console.log(data);
           search_result_list.innerHTML = "";
           search_result.classList.remove("invisible");
           search_result.classList.add("visible");
